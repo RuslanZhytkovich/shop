@@ -1,9 +1,9 @@
-var updateBtns = document.getElementsByClassName('update-cart')
+var updateBtns = document.getElementsByClassName('update-cart')     // название класса где кнопка 'добавить заказ'
 
 
 for(var i = 0;i < updateBtns.length; i++)
 {
-    updateBtns[i].addEventListener('click', function (){
+    updateBtns[i].addEventListener('click', function (){          // действие при клике
         var productId =  this.dataset.product
         var action = this.dataset.action
         console.log('productId:', productId, 'action:', action)
@@ -47,5 +47,6 @@ function updateUserOrder(productId, action)
 
         .then((data) =>{
             console.log('data:', data)
+            location.reload()
         })
 }
