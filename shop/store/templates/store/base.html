@@ -54,7 +54,7 @@ const csrftoken = getToken('csrftoken');
 	     	<a href="{% url 'cart' %}">
 	    		<img  id="cart-icon" src="{% static 'img/cart.png' %}">
 	    	</a>
-	    	<p id="cart-total">0</p>
+	    	<p id="cart-total"> {{countItems}}</p>
 
 	    </div>
 	  </div>

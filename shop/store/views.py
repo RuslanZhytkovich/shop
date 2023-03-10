@@ -18,8 +18,9 @@ def store(request):
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
+
     products = Product.objects.all()
-    context = {'products': products, 'cartItems': cartItems}
+    context = {'products': products, 'cartItems': cartItems, 'countItems': len(items)}
     return render(request, 'store/store.html', context)
 
 
@@ -61,7 +62,7 @@ def cart(request):
             if product.digital == False:
                 order['shipping'] = True
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    context = {'items': items, 'order': order, 'cartItems': cartItems, 'countItems': len(items)}
     return render(request, 'store/cart.html', context)
 
 
@@ -77,7 +78,7 @@ def checkout(request):
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    context = {'items': items, 'order': order, 'cartItems': cartItems, 'countItems': len(items)}
     return render(request, 'store/checkout.html', context)
 
 
@@ -114,11 +115,11 @@ def processOrder(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        total = float(data['form']['total'])
+        #total = float(data['form']['total'])
         order.transaction_id = transaction_id
 
-        if total == order.get_cart_total:
-            order.complete = True
+
+        order.complete = True
         order.save()
 
         if order.shipping == True:
