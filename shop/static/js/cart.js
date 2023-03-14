@@ -30,7 +30,9 @@ function addCookieItem(productId, action)
         if(cart[productId] == undefined)
         {
             cart[productId] = {'quantity':1}
-        }else{
+        }
+        else
+        {
             cart[productId]['quantity'] += 1
         }
     }
